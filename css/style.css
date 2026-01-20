@@ -245,8 +245,9 @@
 
 
     #payslipArea{
-      overflow: hidden !important;
+      overflow-y: scroll !important;
       overflow-x: hidden !important;
+
     }
 
     #salary-table{
