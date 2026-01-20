@@ -22,7 +22,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- link custom css -->
-   <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
@@ -31,11 +31,11 @@
     <div class="text-center mb-3">
       <h2 class="app-title"><i class="bi bi-receipt-cutoff"></i> Payslip Generator</h2>
       <p class="text-muted mb-0">
-         Paid Days auto update = Total Days |  Company Info Static
+        ✅ Paid Days pro-rata salary | ✅ Company Info Static
       </p>
     </div>
 
-    <!--  FULL WIDTH FORM -->
+    <!-- FULL WIDTH FORM -->
     <div class="row justify-content-center">
       <div class="col-12 col-xl-10">
         <div class="card card-premium">
@@ -76,7 +76,7 @@
                 <input id="location" class="form-control" value="Salt Lake EN 75">
               </div>
 
-              <!--  Bank dropdown -->
+              <!-- Bank dropdown -->
               <div class="col-md-4">
                 <label class="form-label">Bank Name</label>
                 <select id="bankName" class="form-select">
@@ -103,20 +103,21 @@
                 <input id="ctc" type="number" class="form-control" value="12000">
               </div>
 
-              <!--  Total / Paid Days -->
+              <!-- Total / Paid Days -->
               <div class="col-md-6">
                 <label class="form-label">Total Days</label>
                 <input id="totalDays" type="number" class="form-control" value="30" min="1" max="31">
               </div>
 
               <div class="col-md-6">
-                <label class="form-label">Paid Days (Auto)</label>
-                <input id="paidDays" type="number" class="form-control" value="30" readonly>
+                <label class="form-label">Paid Days (Type manually)</label>
+                <input id="paidDays" type="number" class="form-control" value="30" min="0">
+                <small class="text-muted">Example: Total=30, Paid=15 → Salary=6000</small>
               </div>
 
               <hr class="my-2">
 
-              <!--  LIVE SALARY BREAKUP -->
+              <!-- LIVE SALARY BREAKUP -->
               <div class="col-12">
                 <h6 class="fw-bold mb-2 text-primary">
                   <i class="bi bi-calculator"></i> Auto Salary Breakup (Live)
@@ -153,7 +154,7 @@
                 <input id="fNet" type="number" class="form-control fw-bold text-success" readonly>
               </div>
 
-              <!--  BUTTON -->
+              <!-- BUTTON -->
               <div class="col-12 mt-2">
                 <button id="previewBtn" class="btn btn-success btn-premium w-100">
                   <i class="bi bi-eye-fill"></i> Preview Salary Slip (Popup)
@@ -169,7 +170,7 @@
   </div>
 
 
-  <!--  MODAL POPUP -->
+  <!-- MODAL POPUP -->
   <div class="modal fade" id="previewModal" tabindex="-1">
     <div class="modal-dialog modal-xl modal-dialog-centered">
       <div class="modal-content">
@@ -183,14 +184,12 @@
           <div class="slip-wrap">
             <div id="payslipArea" class="payslip">
 
-              <!--  STATIC COMPANY INFO -->
+              <!-- STATIC COMPANY INFO -->
               <div class="slip-header">
                 <div class="logo-box">
-                  <!--  Static logo -->
                   <img src="./img/logo.jpg" alt="Logo">
                 </div>
                 <div class="company-text">
-                  <!--  Static company name/address -->
                   <h4>IRS DESIGN PVT. LTD.</h4>
                   <p>EN75, 3rd Floor, Sector V, Saltlake City, Kolkata</p>
                 </div>
@@ -207,29 +206,61 @@
 
               <div class="grid-2">
                 <table class="info-table">
-                  <tr><td>Emp Id</td><td id="pEmpId">—</td></tr>
-                  <tr><td>Employee Name</td><td id="pEmpName">—</td></tr>
-                  <tr><td>Location</td><td id="pLocation">—</td></tr>
-                  <tr><td>Department</td><td id="pDept">—</td></tr>
-                  <tr><td>Designation</td><td id="pDesig">—</td></tr>
+                  <tr>
+                    <td>Emp Id</td>
+                    <td id="pEmpId">—</td>
+                  </tr>
+                  <tr>
+                    <td>Employee Name</td>
+                    <td id="pEmpName">—</td>
+                  </tr>
+                  <tr>
+                    <td>Location</td>
+                    <td id="pLocation">—</td>
+                  </tr>
+                  <tr>
+                    <td>Department</td>
+                    <td id="pDept">—</td>
+                  </tr>
+                  <tr>
+                    <td>Designation</td>
+                    <td id="pDesig">—</td>
+                  </tr>
                 </table>
 
                 <table class="info-table">
-                  <tr><td>Bank Name</td><td id="pBank">—</td></tr>
-                  <tr><td>Account No</td><td id="pAcc">—</td></tr>
-                  <tr><td>UAN</td><td>—</td></tr>
-                  <tr><td>ESI No</td><td>—</td></tr>
-                  <tr><td>PF No</td><td>—</td></tr>
-                  <tr><td>NPS PRAN No</td><td>—</td></tr>
+                  <tr>
+                    <td>Bank Name</td>
+                    <td id="pBank">—</td>
+                  </tr>
+                  <tr>
+                    <td>Account No</td>
+                    <td id="pAcc">—</td>
+                  </tr>
+                  <tr>
+                    <td>UAN</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td>ESI No</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td>PF No</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td>NPS PRAN No</td>
+                    <td>—</td>
+                  </tr>
                 </table>
               </div>
 
               <div class="attendance">
                 <div class="head">ATTENDANCE</div>
                 <div class="rowx">
-                  <div>TOTAL DAYS - <span id="pPaidDays">—</span></div>
-                  <div>PAID DAYS - <span id="pTotalDays">—</span></div>
-                  
+                  <div>TOTAL DAYS - <span id="pTotalDays">—</span></div>
+                  <div>PAID DAYS - <span id="pPaidDays">—</span></div>
                 </div>
               </div>
 
@@ -244,10 +275,34 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr><td>Basic</td><td id="aBasic">0</td><td id="eBasic">0</td><td>—</td><td>0</td></tr>
-                  <tr><td>HRA</td><td id="aHra">0</td><td id="eHra">0</td><td>—</td><td>0</td></tr>
-                  <tr><td>Conveyance</td><td id="aConv">0</td><td id="eConv">0</td><td>—</td><td>0</td></tr>
-                  <tr><td>Others</td><td id="aOther">0</td><td id="eOther">0</td><td>—</td><td>0</td></tr>
+                  <tr>
+                    <td>Basic</td>
+                    <td id="aBasic">0</td>
+                    <td id="eBasic">0</td>
+                    <td>—</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>HRA</td>
+                    <td id="aHra">0</td>
+                    <td id="eHra">0</td>
+                    <td>—</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>Conveyance</td>
+                    <td id="aConv">0</td>
+                    <td id="eConv">0</td>
+                    <td>—</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>Others</td>
+                    <td id="aOther">0</td>
+                    <td id="eOther">0</td>
+                    <td>—</td>
+                    <td>0</td>
+                  </tr>
                 </tbody>
                 <tfoot>
                   <tr>
@@ -305,41 +360,45 @@
       return d.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
     }
 
-    //  Total Days change => Paid Days auto set same
-    function autoPaidDays() {
-      let totalDays = Number(document.getElementById("totalDays").value || 30);
+    // ✅ Fix: PaidDays never > TotalDays
+    function fixPaidDays() {
+      const totalDays = Number(document.getElementById("totalDays").value || 30);
+      const paidInput = document.getElementById("paidDays");
+      let paidDays = Number(paidInput.value || 0);
 
-      if (totalDays < 1) totalDays = 1;
-      if (totalDays > 31) totalDays = 31;
+      if (paidDays > totalDays) paidDays = totalDays;
+      if (paidDays < 0) paidDays = 0;
 
-      document.getElementById("totalDays").value = totalDays;
-      document.getElementById("paidDays").value = totalDays; //  Auto
+      paidInput.value = paidDays;
     }
 
     function calculateSalary() {
+      fixPaidDays();
+
       const ctc = Number(document.getElementById("ctc").value || 0);
       const totalDays = Number(document.getElementById("totalDays").value || 30);
-      const paidDays = Number(document.getElementById("paidDays").value || totalDays);
+      const paidDays = Number(document.getElementById("paidDays").value || 0);
 
-      const ratio = totalDays ? (paidDays / totalDays) : 0;
+      // ✅ PRO-RATA salary
+      const earnedSalary = totalDays ? (ctc / totalDays) * paidDays : 0;
 
+      // ✅ Salary breakup always from FULL CTC (actual)
       const basic = ctc * 0.45;
       const hra = basic * 0.45;
       const conv = 1600;
-
       let other = ctc - (basic + hra + conv);
       if (other < 0) other = 0;
 
+      // ✅ Earned breakup from earnedSalary ratio
+      const ratio = totalDays ? (paidDays / totalDays) : 0;
       const eBasic = basic * ratio;
       const eHra = hra * ratio;
       const eConv = conv * ratio;
       const eOther = other * ratio;
 
       const aGross = ctc;
-      const eGross = ctc * ratio;
-
-      const net = ctc * ratio;
-      const totalDeduction = 0;
+      const eGross = earnedSalary;
+      const net = earnedSalary;
 
       document.getElementById("aBasic").innerText = inr(basic.toFixed(0));
       document.getElementById("aHra").innerText = inr(hra.toFixed(0));
@@ -353,7 +412,7 @@
 
       document.getElementById("aGross").innerText = inr(aGross.toFixed(0));
       document.getElementById("eGross").innerText = inr(eGross.toFixed(0));
-      document.getElementById("deduct").innerText = inr(totalDeduction.toFixed(0));
+      document.getElementById("deduct").innerText = "0";
       document.getElementById("netPay").innerText = inr(net.toFixed(0));
 
       document.getElementById("fBasic").value = basic.toFixed(0);
@@ -361,7 +420,9 @@
       document.getElementById("fConv").value = conv.toFixed(0);
       document.getElementById("fOther").value = other.toFixed(0);
       document.getElementById("fGross").value = ctc.toFixed(0);
-      document.getElementById("fNet").value = net.toFixed(0);
+
+      // ✅ IMPORTANT: Live net uses earnedSalary
+      document.getElementById("fNet").value = earnedSalary.toFixed(0);
     }
 
     function bindPreview() {
@@ -384,12 +445,10 @@
       calculateSalary();
     }
 
-    document.getElementById("totalDays").addEventListener("input", () => {
-      autoPaidDays();
-      calculateSalary();
+    // Live update salary
+    ["ctc", "paidDays", "totalDays"].forEach(id => {
+      document.getElementById(id).addEventListener("input", calculateSalary);
     });
-
-    document.getElementById("ctc").addEventListener("input", calculateSalary);
 
     document.getElementById("previewBtn").addEventListener("click", () => {
       bindPreview();
@@ -428,11 +487,9 @@
     });
 
     // init
-    autoPaidDays();
     calculateSalary();
   </script>
 
 </body>
 
 </html>
-
