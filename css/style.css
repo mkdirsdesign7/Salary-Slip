@@ -1,0 +1,251 @@
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #d7e0f5;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    .app-title {
+      font-weight: 800;
+      letter-spacing: 0.4px;
+    }
+
+    .card-premium {
+      border: 0;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.288);
+      overflow: hidden;
+    }
+
+    .card-premium .card-header {
+      border: 0;
+      background: linear-gradient(135deg, #0d6efd, #00c2ff);
+      color: #fff;
+      padding: 18px 22px;
+    }
+
+    .form-label {
+      font-weight: 600;
+      color: #333;
+    }
+
+    .btn-premium {
+      border-radius: 12px;
+      font-weight: 700;
+      padding: 12px 16px;
+      box-shadow: 0 10px 18px rgba(13, 110, 253, 0.20);
+    }
+
+    /* Payslip Design */
+    .slip-wrap {
+      background: #fff;
+      border-radius: 14px;
+      padding: 18px;
+      border: 1px solid #e9eef8;
+    }
+
+    .payslip {
+      width: 794px;
+      min-height: 1123px;
+      margin: auto;
+      padding: 18px;
+      border: 2px solid #1f2a44;
+      position: relative;
+      background: #fff;
+    }
+
+    .slip-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border-bottom: 2px solid #1f2a44;
+      padding-bottom: 12px;
+      margin-bottom: 12px;
+    }
+
+    .logo-box {
+      width: 75px;
+      height: 75px;
+      border: 2px solid #1f2a44;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 10px;
+      background: #fff;
+      flex-shrink: 0;
+    }
+
+    .logo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .company-text h4 {
+      margin: 0;
+      font-weight: 800;
+      color: #1f2a44;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    .company-text p {
+      margin: 0;
+      color: #555;
+      font-size: 12.5px;
+    }
+
+    .pay-title {
+      text-align: center;
+      margin: 10px 0 12px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      border: 2px solid #1f2a44;
+      display: inline-block;
+      padding: 6px 18px;
+      font-size: 14px;
+    }
+
+    .top-meta {
+      display: flex;
+      justify-content: space-between;
+      border: 1px solid #1f2a44;
+      padding: 8px 10px;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 10px;
+      background: #eef5ff;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    .info-table td {
+      border: 1px solid #1f2a44;
+      padding: 6px 8px;
+    }
+
+    .info-table td:first-child {
+      width: 38%;
+      font-weight: 700;
+      background: #f3f7ff;
+    }
+
+    .attendance {
+      border: 1px solid #1f2a44;
+      margin-top: 10px;
+    }
+
+    .attendance .head {
+      background: #cfe3ff;
+      font-weight: 800;
+      padding: 7px 10px;
+      border-bottom: 1px solid #1f2a44;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .attendance .rowx {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      font-size: 12px;
+    }
+
+    .attendance .rowx div {
+      padding: 7px 10px;
+      border-right: 1px solid #1f2a44;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .attendance .rowx div:last-child {
+      border-right: 0;
+    }
+
+    .salary-table {
+      margin-top: 12px;
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    .salary-table th,
+    .salary-table td {
+      border: 1px solid #1f2a44;
+      padding: 7px 8px;
+    }
+
+    .salary-table thead th {
+      background: #cfe3ff;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .salary-table tbody td:first-child {
+      font-weight: 800;
+      background: #f3f7ff;
+    }
+
+    .salary-table tfoot td {
+      font-weight: 900;
+      background: #eef5ff;
+    }
+
+    .net-pay {
+      margin-top: 12px;
+      border: 2px solid #1f2a44;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      font-weight: 900;
+      background: #cfe3ff;
+      font-size: 12px;
+      align-items: center;
+    }
+
+    /*  Signature Area */
+    .sign-wrap {
+      margin-top: 22px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      font-size: 12px;
+    }
+
+    .sign-box {
+      width: 45%;
+      border-top: 2px dashed #1f2a44;
+      padding-top: 8px;
+      text-align: center;
+      font-weight: 800;
+      color: #1f2a44;
+    }
+
+    .note {
+      margin-top: 10px;
+      font-size: 11px;
+      color: #444;
+      text-align: center;
+    }
+
+    @media(max-width: 992px) {
+      .payslip {
+        width: 100%;
+        min-height: auto;
+      }
+    }

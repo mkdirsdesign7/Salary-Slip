@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Premium Payslip Generator</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- html2canvas -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+  <!-- jsPDF -->
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- link custom css -->
+   <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+
+  <div class="container-fluid py-4">
+    <div class="text-center mb-3">
+      <h2 class="app-title"><i class="bi bi-receipt-cutoff"></i> Payslip Generator</h2>
+      <p class="text-muted mb-0">
+         Paid Days auto update = Total Days |  Company Info Static
+      </p>
+    </div>
+
+    <!--  FULL WIDTH FORM -->
+    <div class="row justify-content-center">
+      <div class="col-12 col-xl-10">
+        <div class="card card-premium">
+          <div class="card-header">
+            <h5 class="mb-0"><i class="bi bi-person-lines-fill"></i> Employee Info</h5>
+          </div>
+
+          <div class="card-body p-4">
+            <div class="row g-3">
+
+              <div class="col-md-3">
+                <label class="form-label">Employee ID</label>
+                <input id="empId" class="form-control" value="1890">
+              </div>
+
+              <div class="col-md-3">
+                <label class="form-label">Pay Month</label>
+                <input id="payMonth" class="form-control" value="Jul-25">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Employee Name</label>
+                <input id="empName" class="form-control" value="Trisha Prasad">
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label">Department</label>
+                <input id="dept" class="form-control" value="HR">
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label">Designation</label>
+                <input id="desig" class="form-control" value="HR: Recruiter and Executive">
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label">Location</label>
+                <input id="location" class="form-control" value="Salt Lake EN 75">
+              </div>
+
+              <!--  Bank dropdown -->
+              <div class="col-md-4">
+                <label class="form-label">Bank Name</label>
+                <select id="bankName" class="form-select">
+                  <option value="UCO Bank" selected>UCO Bank</option>
+                  <option value="SBI">SBI</option>
+                  <option value="HDFC Bank">HDFC Bank</option>
+                  <option value="ICICI Bank">ICICI Bank</option>
+                  <option value="Axis Bank">Axis Bank</option>
+                  <option value="Punjab National Bank">Punjab National Bank</option>
+                  <option value="Bank of Baroda">Bank of Baroda</option>
+                  <option value="Canara Bank">Canara Bank</option>
+                  <option value="Union Bank of India">Union Bank of India</option>
+                  <option value="Kotak Mahindra Bank">Kotak Mahindra Bank</option>
+                </select>
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label">Account No</label>
+                <input id="accNo" class="form-control" value="32780110045558">
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label">CTC (Monthly)</label>
+                <input id="ctc" type="number" class="form-control" value="12000">
+              </div>
+
+              <!--  Total / Paid Days -->
+              <div class="col-md-6">
+                <label class="form-label">Total Days</label>
+                <input id="totalDays" type="number" class="form-control" value="30" min="1" max="31">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Paid Days (Auto)</label>
+                <input id="paidDays" type="number" class="form-control" value="30" readonly>
+              </div>
+
+              <hr class="my-2">
+
+              <!--  LIVE SALARY BREAKUP -->
+              <div class="col-12">
+                <h6 class="fw-bold mb-2 text-primary">
+                  <i class="bi bi-calculator"></i> Auto Salary Breakup (Live)
+                </h6>
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label">Basic</label>
+                <input id="fBasic" type="number" class="form-control" readonly>
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label">HRA</label>
+                <input id="fHra" type="number" class="form-control" readonly>
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label">Conveyance</label>
+                <input id="fConv" type="number" class="form-control" readonly>
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label">Others</label>
+                <input id="fOther" type="number" class="form-control" readonly>
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label">Gross Earning</label>
+                <input id="fGross" type="number" class="form-control fw-bold" readonly>
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label">In-hand Salary (Net)</label>
+                <input id="fNet" type="number" class="form-control fw-bold text-success" readonly>
+              </div>
+
+              <!--  BUTTON -->
+              <div class="col-12 mt-2">
+                <button id="previewBtn" class="btn btn-success btn-premium w-100">
+                  <i class="bi bi-eye-fill"></i> Preview Salary Slip (Popup)
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!--  MODAL POPUP -->
+  <div class="modal fade" id="previewModal" tabindex="-1">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-file-earmark-pdf"></i> Payslip Preview</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="slip-wrap">
+            <div id="payslipArea" class="payslip">
+
+              <!--  STATIC COMPANY INFO -->
+              <div class="slip-header">
+                <div class="logo-box">
+                  <!--  Static logo -->
+                  <img src="./img/logo.jpg" alt="Logo">
+                </div>
+                <div class="company-text">
+                  <!--  Static company name/address -->
+                  <h4>IRS DESIGN PVT. LTD.</h4>
+                  <p>EN75, 3rd Floor, Sector V, Saltlake City, Kolkata</p>
+                </div>
+              </div>
+
+              <div class="top-meta">
+                <div>Payslip No: <span id="pSlipNo">PS-0000</span></div>
+                <div>Date: <span id="pGenDate">—</span></div>
+              </div>
+
+              <div class="text-center">
+                <div class="pay-title">Pay Slip - <span id="pMonth">Month</span></div>
+              </div>
+
+              <div class="grid-2">
+                <table class="info-table">
+                  <tr><td>Emp Id</td><td id="pEmpId">—</td></tr>
+                  <tr><td>Employee Name</td><td id="pEmpName">—</td></tr>
+                  <tr><td>Location</td><td id="pLocation">—</td></tr>
+                  <tr><td>Department</td><td id="pDept">—</td></tr>
+                  <tr><td>Designation</td><td id="pDesig">—</td></tr>
+                </table>
+
+                <table class="info-table">
+                  <tr><td>Bank Name</td><td id="pBank">—</td></tr>
+                  <tr><td>Account No</td><td id="pAcc">—</td></tr>
+                  <tr><td>UAN</td><td>—</td></tr>
+                  <tr><td>ESI No</td><td>—</td></tr>
+                  <tr><td>PF No</td><td>—</td></tr>
+                  <tr><td>NPS PRAN No</td><td>—</td></tr>
+                </table>
+              </div>
+
+              <div class="attendance">
+                <div class="head">ATTENDANCE</div>
+                <div class="rowx">
+                  <div>TOTAL DAYS - <span id="pTotalDays">—</span></div>
+                  <div>PAID DAYS - <span id="pPaidDays">—</span></div>
+                </div>
+              </div>
+
+              <table class="salary-table">
+                <thead>
+                  <tr>
+                    <th>EARNINGS</th>
+                    <th>ACTUAL (INR)</th>
+                    <th>EARNED (INR)</th>
+                    <th>DEDUCTIONS</th>
+                    <th>AMOUNT (INR)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Basic</td><td id="aBasic">0</td><td id="eBasic">0</td><td>—</td><td>0</td></tr>
+                  <tr><td>HRA</td><td id="aHra">0</td><td id="eHra">0</td><td>—</td><td>0</td></tr>
+                  <tr><td>Conveyance</td><td id="aConv">0</td><td id="eConv">0</td><td>—</td><td>0</td></tr>
+                  <tr><td>Others</td><td id="aOther">0</td><td id="eOther">0</td><td>—</td><td>0</td></tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td>GROSS EARNINGS</td>
+                    <td id="aGross">0</td>
+                    <td id="eGross">0</td>
+                    <td>TOTAL DEDUCTIONS</td>
+                    <td id="deduct">0</td>
+                  </tr>
+                </tfoot>
+              </table>
+
+              <div class="net-pay">
+                <div>NET PAY AMOUNT</div>
+                <div>₹ <span id="netPay">0</span></div>
+              </div>
+
+              <div class="sign-wrap mt-5">
+                <div class="sign-box">Employee Signature</div>
+                <div class="sign-box">HR / Authorized Signature</div>
+              </div>
+
+              <div class="note">This is a computer generated advice and does not require signature.</div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-primary btn-premium" id="downloadBtn">
+            <i class="bi bi-download"></i> Download PDF
+          </button>
+          <button class="btn btn-outline-secondary btn-premium" data-bs-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    const inr = (num) => Number(num || 0).toLocaleString("en-IN");
+
+    function generateSlipNo() {
+      const d = new Date();
+      const yyyy = d.getFullYear();
+      const mm = String(d.getMonth() + 1).padStart(2, "0");
+      const dd = String(d.getDate()).padStart(2, "0");
+      const random = Math.floor(1000 + Math.random() * 9000);
+      return `PS-${yyyy}${mm}${dd}-${random}`;
+    }
+
+    function todayDate() {
+      const d = new Date();
+      return d.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
+    }
+
+    //  Total Days change => Paid Days auto set same
+    function autoPaidDays() {
+      let totalDays = Number(document.getElementById("totalDays").value || 30);
+
+      if (totalDays < 1) totalDays = 1;
+      if (totalDays > 31) totalDays = 31;
+
+      document.getElementById("totalDays").value = totalDays;
+      document.getElementById("paidDays").value = totalDays; //  Auto
+    }
+
+    function calculateSalary() {
+      const ctc = Number(document.getElementById("ctc").value || 0);
+      const totalDays = Number(document.getElementById("totalDays").value || 30);
+      const paidDays = Number(document.getElementById("paidDays").value || totalDays);
+
+      const ratio = totalDays ? (paidDays / totalDays) : 0;
+
+      const basic = ctc * 0.45;
+      const hra = basic * 0.45;
+      const conv = 1600;
+
+      let other = ctc - (basic + hra + conv);
+      if (other < 0) other = 0;
+
+      const eBasic = basic * ratio;
+      const eHra = hra * ratio;
+      const eConv = conv * ratio;
+      const eOther = other * ratio;
+
+      const aGross = ctc;
+      const eGross = ctc * ratio;
+
+      const net = ctc * ratio;
+      const totalDeduction = 0;
+
+      document.getElementById("aBasic").innerText = inr(basic.toFixed(0));
+      document.getElementById("aHra").innerText = inr(hra.toFixed(0));
+      document.getElementById("aConv").innerText = inr(conv.toFixed(0));
+      document.getElementById("aOther").innerText = inr(other.toFixed(0));
+
+      document.getElementById("eBasic").innerText = inr(eBasic.toFixed(0));
+      document.getElementById("eHra").innerText = inr(eHra.toFixed(0));
+      document.getElementById("eConv").innerText = inr(eConv.toFixed(0));
+      document.getElementById("eOther").innerText = inr(eOther.toFixed(0));
+
+      document.getElementById("aGross").innerText = inr(aGross.toFixed(0));
+      document.getElementById("eGross").innerText = inr(eGross.toFixed(0));
+      document.getElementById("deduct").innerText = inr(totalDeduction.toFixed(0));
+      document.getElementById("netPay").innerText = inr(net.toFixed(0));
+
+      document.getElementById("fBasic").value = basic.toFixed(0);
+      document.getElementById("fHra").value = hra.toFixed(0);
+      document.getElementById("fConv").value = conv.toFixed(0);
+      document.getElementById("fOther").value = other.toFixed(0);
+      document.getElementById("fGross").value = ctc.toFixed(0);
+      document.getElementById("fNet").value = net.toFixed(0);
+    }
+
+    function bindPreview() {
+      document.getElementById("pEmpId").innerText = document.getElementById("empId").value;
+      document.getElementById("pMonth").innerText = document.getElementById("payMonth").value;
+      document.getElementById("pEmpName").innerText = document.getElementById("empName").value;
+      document.getElementById("pLocation").innerText = document.getElementById("location").value;
+      document.getElementById("pDept").innerText = document.getElementById("dept").value;
+      document.getElementById("pDesig").innerText = document.getElementById("desig").value;
+
+      document.getElementById("pBank").innerText = document.getElementById("bankName").value;
+      document.getElementById("pAcc").innerText = document.getElementById("accNo").value;
+
+      document.getElementById("pTotalDays").innerText = document.getElementById("totalDays").value;
+      document.getElementById("pPaidDays").innerText = document.getElementById("paidDays").value;
+
+      document.getElementById("pSlipNo").innerText = generateSlipNo();
+      document.getElementById("pGenDate").innerText = todayDate();
+
+      calculateSalary();
+    }
+
+    document.getElementById("totalDays").addEventListener("input", () => {
+      autoPaidDays();
+      calculateSalary();
+    });
+
+    document.getElementById("ctc").addEventListener("input", calculateSalary);
+
+    document.getElementById("previewBtn").addEventListener("click", () => {
+      bindPreview();
+      new bootstrap.Modal(document.getElementById("previewModal")).show();
+    });
+
+    document.getElementById("downloadBtn").addEventListener("click", async () => {
+      bindPreview();
+
+      const payslip = document.getElementById("payslipArea");
+      payslip.style.width = "794px";
+      payslip.style.minHeight = "1123px";
+
+      const canvas = await html2canvas(payslip, {
+        scale: 3,
+        useCORS: true,
+        backgroundColor: "#ffffff"
+      });
+
+      const imgData = canvas.toDataURL("image/png");
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF("p", "mm", "a4");
+
+      const pdfWidth = 210;
+      const pdfHeight = 297;
+
+      const imgProps = pdf.getImageProperties(imgData);
+      const imgHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, imgHeight > pdfHeight ? pdfHeight : imgHeight);
+
+      const empName = document.getElementById("empName").value || "Employee";
+      const month = document.getElementById("payMonth").value || "Payslip";
+
+      pdf.save(`${empName}_${month}_Payslip.pdf`);
+    });
+
+    // init
+    autoPaidDays();
+    calculateSalary();
+  </script>
+
+</body>
+
+</html>
