@@ -243,6 +243,11 @@
       text-align: center;
     }
 
+
+    #previewModal{
+      overflow: hidden !important;
+    }
+
     @media(max-width: 992px) {
       .payslip {
         width: 100%;
