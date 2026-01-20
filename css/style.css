@@ -246,6 +246,7 @@
 
     #previewModal{
       overflow: hidden !important;
+      overflow-x: hidden !important;
     }
 
     @media(max-width: 992px) {
