@@ -360,7 +360,7 @@
       return d.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
     }
 
-    // ✅ Fix: PaidDays never > TotalDays
+    //  Fix: PaidDays never > TotalDays
     function fixPaidDays() {
       const totalDays = Number(document.getElementById("totalDays").value || 30);
       const paidInput = document.getElementById("paidDays");
