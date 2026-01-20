@@ -249,6 +249,11 @@
       overflow-x: hidden !important;
     }
 
+    .salary-table{
+       overflow: hidden !important;
+      overflow-x: hidden !important;
+    }
+
     @media(max-width: 992px) {
       .payslip {
         width: 100%;
